@@ -1,6 +1,6 @@
 {
   "name": "elb-registrator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Register EC2 instances with an ELB",
   "main": "application.js",
   "scripts": {
