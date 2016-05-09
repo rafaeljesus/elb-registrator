@@ -1,6 +1,4 @@
-# elb-registrator
-Register EC2 instances with an ELB
-
+![elb registrator](http://content.containership.io/hubfs/elb-registrator.svg)
 ## About
 
 ### Build Status
