@@ -2,9 +2,14 @@
   "name": "elb-registrator",
   "version": "0.1.1",
   "description": "Register EC2 instances with an ELB",
-  "main": "application.js",
+  "main": "build/index.js",
   "scripts": {
-    "test": "mocha"
+    "start": "npm run build && npm run serve",
+    "serve": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 build/index.js",
+    "build": "npm run clean && babel --presets es2015-node6,stage-2 --plugins transform-runtime --ignore node_modules,test,coverage . -d build",
+    "clean": "rm -rf build && mkdir build",
+    "test": "npm run lint && NODE_ENV=test nyc --reporter=lcov ava && nyc report",
+    "lint": "standard --verbose | snazzy"
   },
   "repository": {
     "type": "git",
@@ -22,10 +27,33 @@
     "url": "https://github.com/containership/elb-registrator/issues"
   },
   "homepage": "https://github.com/containership/elb-registrator",
+  "ava": {
+    "files": [
+      "test/**/*spec.js"
+    ],
+    "failFast": true,
+    "require": [
+      "babel-register",
+      "./test"
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "dependencies": {
-    "async": "^2.0.0-rc.2",
-    "aws-sdk": "^2.3.1",
-    "lodash": "^4.8.2",
-    "mocha": "^2.4.5"
+    "aws-sdk": "^2.3.17",
+    "lodash": "^4.13.1"
+  },
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "babel-cli": "^6.9.0",
+    "babel-eslint": "^6.0.4",
+    "babel-preset-es2015-node6": "^0.2.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "babel-register": "^6.8.0",
+    "nock": "^8.0.0",
+    "nyc": "^6.4.4",
+    "snazzy": "^4.0.0",
+    "standard": "^7.1.2"
   }
 }
