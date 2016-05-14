@@ -26,6 +26,8 @@ build/Release
 # Dependency directory
 node_modules
 
+.nyc_output
+
 # Optional npm cache directory
 .npm
 
